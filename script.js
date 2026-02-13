@@ -4,7 +4,6 @@ canvas.height = window.innerHeight;
 
 var context = canvas.getContext("2d");
 var stars = 500;
-var colorrange = [0, 60, 240];
 var starArray = [];
 
 function getRandom(min, max) {
@@ -13,26 +12,22 @@ function getRandom(min, max) {
 
 // Initialize stars
 for (var i = 0; i < stars; i++) {
-    var x = Math.random() * canvas.offsetWidth;
-    var y = Math.random() * canvas.offsetHeight;
+    var x = Math.random() * canvas.width;
+    var y = Math.random() * canvas.height;
     var radius = Math.random() * 1.2;
-    var hue = colorrange[getRandom(0, colorrange.length - 1)];
-    var sat = getRandom(50, 100);
     var opacity = Math.random();
-    starArray.push({ x, y, radius, hue, sat, opacity });
+    starArray.push({ x, y, radius, opacity });
 }
 
 var frameNumber = 0;
 var opacity = 0;
-
-var baseFrame = context.getImageData(0, 0, window.innerWidth, window.innerHeight);
 
 function drawStars() {
     for (var i = 0; i < stars; i++) {
         var star = starArray[i];
         context.beginPath();
         context.arc(star.x, star.y, star.radius, 0, 360);
-        context.fillStyle = "hsla(" + star.hue + ", " + star.sat + "%, 88%, " + star.opacity + ")";
+        context.fillStyle = "rgba(255,255,255," + star.opacity + ")";
         context.fill();
     }
 }
@@ -48,16 +43,16 @@ function updateStars() {
 const button = document.getElementById("valentinesButton");
 
 button.addEventListener("click", () => {
-  if (button.textContent === "Click Me! ❤") {
-    button.textContent = "loading...";
-    fetch('send_mail.php')
-      .then(response => {
-        button.textContent = response.ok ? "Check Your Email 🙃" : "Error 😞";
-      })
-      .catch(() => {
-        button.textContent = "Error 😞";
-      });
-  }
+    if (button.textContent === "Click Me! ❤") {
+        button.textContent = "loading...";
+        fetch('send_mail.php')
+            .then(response => {
+                button.textContent = response.ok ? "Check Your Email 🙃" : "Error 😞";
+            })
+            .catch(() => {
+                button.textContent = "Error 😞";
+            });
+    }
 });
 
 function drawTextWithLineBreaks(lines, x, y, fontSize, lineHeight) {
@@ -71,27 +66,26 @@ function drawText() {
     var fontSize = Math.min(28, window.innerWidth / 24);
     var lineHeight = 8;
 
-    context.font = fontSize + "px Comic Sans MS";
+    // Romantic serif font
+    context.font = fontSize + "px Georgia";
     context.textAlign = "center";
 
-    context.shadowColor = "rgba(45,45,255,1)";
-    context.shadowBlur = 8;
+    // Ink glow effect
+    context.shadowColor = "rgba(255,200,180,0.25)";
+    context.shadowBlur = 4;
 
-    // Timing blocks (each 600 frames)
     const block = 600;
     let phase = Math.floor(frameNumber / block);
     let localFrame = frameNumber % block;
 
-    // Fade curve
     if(localFrame < block/2){
         opacity = localFrame/(block/2);
     } else {
         opacity = 1 - ((localFrame-(block/2))/(block/2));
     }
 
-    context.fillStyle = `rgba(45,45,255,${opacity})`;
-
-    // -------- TEXT SEQUENCE --------
+    // Soft parchment ink tone
+    context.fillStyle = `rgba(255,228,214,${opacity})`;
 
     if(phase === 0){
         drawTextWithLineBreaks([
@@ -125,7 +119,7 @@ function drawText() {
     if(phase === 3){
         drawTextWithLineBreaks([
             "You deserve a love",
-            "that reflects who you truly are",
+            "that reflects who you truly are —",
             "genuine, warm, and unwavering.",
             "",
             "Even on days when you doubt yourself,",
@@ -137,7 +131,7 @@ function drawText() {
     if(phase === 4){
         drawTextWithLineBreaks([
             "This Valentine’s Day",
-            "isn’t just about romance",
+            "isn’t just about romance —",
             "it’s about celebrating",
             "hearts like yours.",
             "",
@@ -146,7 +140,7 @@ function drawText() {
     }
 
     if(phase >= 5){
-        context.fillText("Happy Valentine's Day <3", canvas.width/2, canvas.height/2);
+        context.fillText("Happy Valentine's Day ♥", canvas.width/2, canvas.height/2);
         button.style.display = "block";
     }
 
@@ -154,7 +148,14 @@ function drawText() {
 }
 
 function draw() {
-    context.putImageData(baseFrame, 0, 0);
+
+    // ✨ Letter-style gradient background
+    let bg = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+    bg.addColorStop(0, "#6e2c33");  // warm rose
+    bg.addColorStop(1, "#3b0f18");  // deep maroon
+
+    context.fillStyle = bg;
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
     drawStars();
     updateStars();
@@ -167,21 +168,6 @@ function draw() {
 window.addEventListener("resize", function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    baseFrame = context.getImageData(0, 0, window.innerWidth, window.innerHeight);
 });
-
-function draw() {
-    // Paint background color like your image
-    context.fillStyle = "#3E081F";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    drawStars();
-    updateStars();
-    drawText();
-
-    frameNumber++;
-    window.requestAnimationFrame(draw);
-}
-
 
 window.requestAnimationFrame(draw);
