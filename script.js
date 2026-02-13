@@ -69,7 +69,7 @@ function drawDocumentOverlay() {
     const docY = (canvas.height - docHeight) / 2;
 
     // Draw semi-transparent document background
-    context.fillStyle = "rgba(255, 250, 245, 0.45)";
+    context.fillStyle = "rgba(255, 250, 245, 0.25)";
     context.shadowColor = "rgba(0, 0, 0, 0.4)";
     context.shadowBlur = 30;
     context.shadowOffsetX = 0;
@@ -101,7 +101,7 @@ function drawDocumentOverlay() {
     context.font = "italic 24px Georgia";
     context.textAlign = "left";
     context.fillStyle = "rgba(107, 64, 66, 0.95)";
-    context.fillText("My dearest Shiela,", docX + 40, docY + 50);
+    context.fillText("Dear Shiela,", docX + 40, docY + 50);
 }
 
 function drawText() {
