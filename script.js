@@ -101,7 +101,7 @@ function drawDocumentOverlay() {
     context.font = "italic 24px Georgia";
     context.textAlign = "left";
     context.fillStyle = "rgba(107, 64, 66, 0.95)";
-    context.fillText("My dearest Shiela,", docX + 40, docY + 50);
+    context.fillText("Dear Shiela,", docX + 40, docY + 50);
 }
 
 function drawText() {
