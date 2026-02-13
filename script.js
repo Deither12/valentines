@@ -101,7 +101,7 @@ function drawDocumentOverlay() {
     context.font = "italic 24px Georgia";
     context.textAlign = "left";
     context.fillStyle = "rgba(107, 64, 66, 0.95)";
-    context.fillText("Dear Shiela,", docX + 40, docY + 50);
+    context.fillText("My dearest Shiela,", docX + 40, docY + 50);
 }
 
 function drawText() {
@@ -184,7 +184,17 @@ function drawText() {
 
     if(phase >= 5){
         context.fillText("Happy Valentine's Day ♥", canvas.width/2, canvas.height/2);
-        button.style.display = "block";
+        
+        // Draw "From Deither" signature at bottom right of document
+        const docWidth = Math.min(700, canvas.width * 0.85);
+        const docHeight = Math.min(600, canvas.height * 0.75);
+        const docX = (canvas.width - docWidth) / 2;
+        const docY = (canvas.height - docHeight) / 2;
+        
+        context.font = "italic 24px Georgia";
+        context.textAlign = "right";
+        context.fillStyle = "rgba(107, 64, 66, 0.95)";
+        context.fillText("From Deither", docX + docWidth - 40, docY + docHeight - 40);
     }
 
     context.shadowBlur = 0;
