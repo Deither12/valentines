@@ -89,7 +89,7 @@ function drawText() {
 
     if(phase === 0){
         drawTextWithLineBreaks([
-            "On this Valentine’s Day,",
+            "On this Valentine's Day,",
             "I just want to remind you",
             "of something simple but powerful:",
             "you are seen, and you are loved."
@@ -130,9 +130,9 @@ function drawText() {
 
     if(phase === 4){
         drawTextWithLineBreaks([
-            "This Valentine’s Day",
-            "isn’t just about romance —",
-            "it’s about celebrating",
+            "This Valentine's Day",
+            "isn't just about romance —",
+            "it's about celebrating",
             "hearts like yours.",
             "",
             "And yours is truly special."
@@ -149,10 +149,10 @@ function drawText() {
 
 function draw() {
 
-    // ✨ Letter-style gradient background
+    // ✨ Letter-style gradient background - matching the burgundy image
     let bg = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-    bg.addColorStop(0, "#6e2c33");  // warm rose
-    bg.addColorStop(1, "#3b0f18");  // deep maroon
+    bg.addColorStop(0, "#8B4049");  // lighter burgundy
+    bg.addColorStop(1, "#3D1319");  // deep burgundy
 
     context.fillStyle = bg;
     context.fillRect(0, 0, canvas.width, canvas.height);
