@@ -61,6 +61,43 @@ function drawTextWithLineBreaks(lines, x, y, fontSize, lineHeight) {
     });
 }
 
+function drawDocumentOverlay() {
+    // Calculate document dimensions and position
+    const docWidth = Math.min(700, canvas.width * 0.85);
+    const docHeight = Math.min(600, canvas.height * 0.75);
+    const docX = (canvas.width - docWidth) / 2;
+    const docY = (canvas.height - docHeight) / 2;
+
+    // Draw semi-transparent document background
+    context.fillStyle = "rgba(255, 250, 245, 0.92)";
+    context.shadowColor = "rgba(0, 0, 0, 0.4)";
+    context.shadowBlur = 30;
+    context.shadowOffsetX = 0;
+    context.shadowOffsetY = 10;
+    context.fillRect(docX, docY, docWidth, docHeight);
+    
+    // Reset shadow
+    context.shadowColor = "transparent";
+    context.shadowBlur = 0;
+    context.shadowOffsetX = 0;
+    context.shadowOffsetY = 0;
+
+    // Add subtle border
+    context.strokeStyle = "rgba(139, 64, 73, 0.15)";
+    context.lineWidth = 1;
+    context.strokeRect(docX, docY, docWidth, docHeight);
+
+    // Add subtle lined paper effect
+    context.strokeStyle = "rgba(139, 64, 73, 0.03)";
+    context.lineWidth = 1;
+    for (let i = docY + 32; i < docY + docHeight; i += 32) {
+        context.beginPath();
+        context.moveTo(docX, i);
+        context.lineTo(docX + docWidth, i);
+        context.stroke();
+    }
+}
+
 function drawText() {
 
     var fontSize = Math.min(28, window.innerWidth / 24);
@@ -71,8 +108,8 @@ function drawText() {
     context.textAlign = "center";
 
     // Ink glow effect
-    context.shadowColor = "rgba(255,200,180,0.25)";
-    context.shadowBlur = 4;
+    context.shadowColor = "rgba(139, 64, 73, 0.3)";
+    context.shadowBlur = 3;
 
     const block = 600;
     let phase = Math.floor(frameNumber / block);
@@ -84,8 +121,8 @@ function drawText() {
         opacity = 1 - ((localFrame-(block/2))/(block/2));
     }
 
-    // Soft parchment ink tone
-    context.fillStyle = `rgba(255,228,214,${opacity})`;
+    // Rich text color for letter aesthetic
+    context.fillStyle = `rgba(74, 50, 52, ${opacity})`;
 
     if(phase === 0){
         drawTextWithLineBreaks([
@@ -159,6 +196,10 @@ function draw() {
 
     drawStars();
     updateStars();
+    
+    // Draw the document overlay before the text
+    drawDocumentOverlay();
+    
     drawText();
 
     frameNumber++;
