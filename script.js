@@ -170,4 +170,18 @@ window.addEventListener("resize", function () {
     baseFrame = context.getImageData(0, 0, window.innerWidth, window.innerHeight);
 });
 
+function draw() {
+    // Paint background color like your image
+    context.fillStyle = "#3E081F";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    drawStars();
+    updateStars();
+    drawText();
+
+    frameNumber++;
+    window.requestAnimationFrame(draw);
+}
+
+
 window.requestAnimationFrame(draw);
