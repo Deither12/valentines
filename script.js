@@ -91,13 +91,13 @@ function drawText() {
 
     if(frameNumber < 250){
         context.fillStyle = `rgba(45, 45, 255, ${opacity})`;
-        context.fillText("everyday day I cannot believe how lucky I am", canvas.width/2, canvas.height/2);
+        context.fillText("On this Valentine’s Day, I just want to remind you of something simple but powerful: you are seen, and you are loved.", canvas.width/2, canvas.height/2);
         opacity = opacity + 0.01;
     }
     //fades out the text by decreasing the opacity
     if(frameNumber >= 250 && frameNumber < 500){
         context.fillStyle = `rgba(45, 45, 255, ${opacity})`;
-        context.fillText("On this Valentine’s Day, I just want to remind you of something simple but powerful: you are seen, and you are loved.", canvas.width/2, canvas.height/2);
+        context.fillText("The way you laugh, the way you carry yourself, the quiet strength you show every day—none of it goes unnoticed.", canvas.width/2, canvas.height/2);
         opacity = opacity - 0.01;
     }
 
@@ -109,7 +109,7 @@ function drawText() {
         context.fillStyle = `rgba(45, 45, 255, ${opacity})`;
 
         if (window.innerWidth < 600) {           //shortens long sentence for mobile screens
-            drawTextWithLineBreaks(["amongst trillions and trillions of stars,", "over billions of years"], canvas.width / 2, canvas.height / 2, fontSize, lineHeight);
+            drawTextWithLineBreaks(["You may not always realize the light you bring into a room, but others feel it. I feel it. Your kindness, your dedication, and your grace inspire more hearts than you know."], canvas.width / 2, canvas.height / 2, fontSize, lineHeight);
         } else {
             context.fillText("amongst trillions and trillions of stars, over billions of years", canvas.width/2, canvas.height/2);
         }
